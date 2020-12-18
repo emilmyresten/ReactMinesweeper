@@ -1,8 +1,13 @@
+import MineField from './MineField.js';
+import FieldView from './views/FieldView.js';
+import Cell from './Cell.js';
+import './style.css';
+
 
 function App() {
   return (
     <div className="App">
-      I'll write a small minesweeper application here :) 
+      <MineField />
     </div>
   );
 }

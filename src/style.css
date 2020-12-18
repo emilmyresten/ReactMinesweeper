@@ -1,0 +1,32 @@
+.rowCell {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.inRowCell {
+    display:flex;
+}
+
+
+.unTouchedCellSquare {
+    background-color: #eee;
+    width:20px;
+    height:20px;
+}
+
+.flaggedCellSquare {
+    background-color: rgb(255, 77, 77);
+    width:20px;
+    height:20px;
+}
+
+.visibleCellSquare {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 255, 98);
+    width: 20px;
+    height: 20px;
+}
