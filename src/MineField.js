@@ -6,7 +6,7 @@ const MineField = () => {
     //lets start with 9x9 matrix
     //in this presenter we will handle all the recursion and
     const mines = 10;
-    const cells = new Array(16).fill().map(()=>Array(30).fill(Cell));
+    const cells = new Array(9).fill().map(()=>Array(9).fill(Cell));
     return <FieldView mineField={cells}/>
 }
 

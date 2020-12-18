@@ -1,3 +1,8 @@
+.GameContainer {
+    display:inline-block;
+    border: solid;
+}
+
 .rowCell {
     display: flex;
     flex-direction: row;

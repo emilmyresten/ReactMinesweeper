@@ -3,7 +3,7 @@ import Cell from '../Cell.js';
 const FieldView = ({mineField}) => {
     console.log(mineField)
     return (
-        <div>
+        <div className="GameContainer">
             {
             mineField.map(row => 
             <div className="rowCell">
