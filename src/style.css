@@ -20,8 +20,23 @@
     height:20px;
 }
 
-.flaggedCellSquare {
+.mineCellSquare {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(255, 77, 77);
+    width:20px;
+    height:20px;
+}
+
+.flaggedCellSquare {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(111, 0, 255);
+    color: #fff;
     width:20px;
     height:20px;
 }
