@@ -16,9 +16,9 @@ const MineFieldView = ({MineField}) => {
                 key={`cell ${MineField.indexOf(row)} ${i++%row.length}`}
                 >
                     {cell === 1 ? 
-                    <Cell props={{isMine: true, MineField, selfIndex: [MineField.indexOf(row), i++%row.length]}} /> 
+                    <Cell props={{isMine: true, MineField, selfIndex: [MineField.indexOf(row), i%row.length]}} /> 
                     : 
-                    <Cell props={{isMine: false, MineField, selfIndex: [MineField.indexOf(row), i++%row.length]}} />}
+                    <Cell props={{isMine: false, MineField, selfIndex: [MineField.indexOf(row), i%row.length]}} />}
                 </div>)
                 }
             </div>)

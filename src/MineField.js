@@ -9,7 +9,7 @@ const MineField = () => {
     const [height, setHeight] = React.useState(9)
     const [width, setWidth] = React.useState(9)
     
-    const mines = 10;
+    const mines = 2;
     const cells = new Array(height).fill().map(()=>Array(width).fill(0));
     for (let i = 0; i < mines; i++) {
         let placed = false;
