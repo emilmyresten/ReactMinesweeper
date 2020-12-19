@@ -1,6 +1,6 @@
 import Cell from '../Cell.js';
 
-const MineFieldView = ({MineField}) => {
+const MineFieldView = ({MineField, lost}) => {
     let i = 0;
     return (
         <div className="GameContainer">
@@ -16,9 +16,9 @@ const MineFieldView = ({MineField}) => {
                 key={`cell ${MineField.indexOf(row)} ${i++%row.length}`}
                 >
                     {cell === 1 ? 
-                    <Cell props={{isMine: true, MineField, selfIndex: [MineField.indexOf(row), i%row.length]}} /> 
+                    <Cell props={{isMine: true, MineField, selfIndex: [MineField.indexOf(row), i%row.length], lost}} /> 
                     : 
-                    <Cell props={{isMine: false, MineField, selfIndex: [MineField.indexOf(row), i%row.length]}} />}
+                    <Cell props={{isMine: false, MineField, selfIndex: [MineField.indexOf(row), i%row.length], lost}} />}
                 </div>)
                 }
             </div>)

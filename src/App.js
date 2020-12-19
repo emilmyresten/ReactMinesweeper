@@ -1,4 +1,3 @@
-import MineField from './MineField.js';
 import NavBar from './NavBar.js';
 import './style.css';
 

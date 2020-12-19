@@ -1,5 +1,1 @@
-1. cells need to reset visibility to false on resize of field
-2. end game when mine is pressed
-3. stop recursion on flag
-
-
+1. add win state

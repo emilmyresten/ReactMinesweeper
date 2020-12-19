@@ -1,6 +1,5 @@
 
-const NavBarView = ({setHeight, setWidth, setMines}) => {
-
+const NavBarView = ({setHeight, setWidth, setMines, setRestart, restart}) => {
     return (
         <div className="TopBar">
             <div 
@@ -20,6 +19,12 @@ const NavBarView = ({setHeight, setWidth, setMines}) => {
             onClick={()=>setExpert(setHeight, setWidth, setMines)}
             >
                 Expert
+            </div>
+            <div
+            className="Restart"
+            onClick={()=>setRestart(restart+=1)}
+            >
+                Restart
             </div>
         </div>
     )

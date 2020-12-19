@@ -1,8 +1,8 @@
 import React from 'react';
 import CellView from './views/CellView.js';
 
-const Cell = ({props: { isMine, MineField, selfIndex}}) => {
-    
+const Cell = ({props: { isMine, MineField, selfIndex, lost}}) => {
+
     const [mine, setMine] = React.useState(isMine)
     const [flag, setFlag] = React.useState(false)
     const [visible, setVisible] = React.useState(false)
@@ -21,7 +21,8 @@ const Cell = ({props: { isMine, MineField, selfIndex}}) => {
         setAdjacent,
         MineField,
         selfIndex,
-        recursivelyOpen
+        recursivelyOpen,
+        lost
     }} />
 }
 
@@ -62,8 +63,9 @@ function recursivelyOpen(MineField, selfIndex, visitedFields) {
     } 
 
     MineField[selfHeight][selfWidth][5](adjacentMines);
-    MineField[selfHeight][selfWidth][4](true);
-
+    if (MineField[selfHeight][selfWidth][1] === false) {
+        MineField[selfHeight][selfWidth][4](true);
+    }
     if (adjacentMines === 0) {
         if (!(visitedFields[selfHeight][selfWidth] === 1)) {
             visitedFields[selfHeight][selfWidth] = 1

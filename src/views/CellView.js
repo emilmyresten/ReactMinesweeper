@@ -1,15 +1,19 @@
-
+import flagImg from '../assets/flag.png';
+import mineImg from '../assets/mine.png';
 import React from 'react';
 
-const CellView = ({props: {mine, setMine, flag, setFlag, visible, setVisible, adjacent, setAdjacent, MineField, selfIndex, recursivelyOpen}}) => {
-    const [lost, setLost] = React.useState(false)
+const CellView = ({props: {mine, setMine, flag, setFlag, visible, setVisible, adjacent, setAdjacent, MineField, selfIndex, recursivelyOpen, lost}}) => {
     return (
         <div 
-        onContextMenu={(e) => {setFlag(!flag);e.preventDefault();return false;}}
-        onClick={!lost ? () => flag ? undefined : handleClick(setVisible, MineField, selfIndex,recursivelyOpen,setAdjacent) : undefined}
+        onContextMenu={!lost[0] ? (e) => {setFlag(!flag);e.preventDefault();return false;} : (e) => {e.preventDefault();return false;} }
+        onClick={!lost[0] ?
+            () => flag ? undefined 
+            : mine ? handleLoss(lost[1], setVisible) 
+            : handleClick(setVisible, MineField, selfIndex,recursivelyOpen,setAdjacent) 
+            : undefined}
         >
             <div className={visible ? mine ? "mineCellSquare" : "visibleCellSquare" : flag ? "flaggedCellSquare" : "unTouchedCellSquare"}>
-                {visible ? mine ? "m" : adjacent : flag ? "f" : ""}
+                {visible ? mine ? <img src={mineImg} alt="m"/> : adjacent === 0 ? " " : adjacent : flag ? <img src={flagImg} alt="f"/> : ""}
             </div>
         </div>
     )
@@ -26,6 +30,8 @@ function handleClick(setVisible, MineField, selfIndex, recursivelyOpen, setAdjac
     recursivelyOpen(MineField, selfIndex, visitedFields)
 }
 
-function handeLoss(setLost) {
+function handleLoss(setLost, setVisible) {
+    setVisible(true);
     setLost(true);
+    console.log("game over!")
 }
