@@ -10,8 +10,6 @@ const Cell = ({props: { isMine, MineField, selfIndex}}) => {
     const [selfHeight, selfWidth] = selfIndex
     MineField[selfHeight][selfWidth] = [mine, flag, visible, adjacent, setVisible, setAdjacent]
 
-
-    console.log(MineField)
     return <CellView props={{
         mine, 
         setMine, 
@@ -31,16 +29,17 @@ const Cell = ({props: { isMine, MineField, selfIndex}}) => {
 export default Cell;
 
 function checkAdjacent(MineField, selfIndex) {
+    // we want to check a square located at selfindex,
+    // if they have adjacent mines, return the number of them
     let n = 0;
     let [selfHeight, selfWidth] = selfIndex;
+    const [maxHeight, maxWidth] = [MineField.length, MineField[0].length] //these handle corners
     for (let h = -1; h < 2; h++) {
         for (let w = -1; w < 2; w++) {
-            try {
-                if (MineField[selfHeight+h][selfWidth+w][0] === true) {
-                    n++;
-                }
-            } catch {
-                console.log("at corner");
+            if (selfHeight+h < 0 || selfHeight+h >= maxHeight || selfWidth+w < 0 || selfWidth+w >= maxWidth) {
+                //we dont want to do any further checkin of adjacency outside our playinfield
+            } else if (MineField[selfHeight+h][selfWidth+w][0] === true) {
+                n++;
             }
         }
     }
@@ -48,39 +47,37 @@ function checkAdjacent(MineField, selfIndex) {
 }
 
 
-function recursivelyOpen(MineField, selfIndex) {
-    const [selfHeight, selfWidth] = selfIndex
-    let n = checkAdjacent(MineField, selfIndex)
-    MineField[selfHeight][selfWidth][5](n);
-    if (n > 0) {
-        console.log("close recursion")
-    } else {
-        console.log("open more")
-        openAdjacent(MineField, selfIndex)
-    }
-}
+function recursivelyOpen(MineField, selfIndex, visitedFields) {
+    // we want to check a square. 
+    // case 1: if it has 0 adjacent mines, open
+    // and check every cell around it.
+    // case 2: it has adjacent mines. dont open any more.
+    let adjacentMines = checkAdjacent(MineField, selfIndex)
 
+    const [selfHeight, selfWidth] = selfIndex;
+    const [maxHeight, maxWidth] = [MineField.length, MineField[0].length];
 
-function openAdjacent(MineField, selfIndex) {
-    let [selfHeight, selfWidth] = selfIndex;
-    for (let h = -1; h < 2; h++) {
-        for (let w = -1; w < 2; w++) {
-            try {
-                if (MineField[selfHeight+h][selfWidth+w][2] === false) {
-                    const adj = checkAdjacent(MineField, [selfHeight+h, selfWidth+w], MineField[selfHeight+h][selfWidth+w][5])
-                    MineField[selfHeight+h][selfWidth+w][5](adj);
-                    MineField[selfHeight+h][selfWidth+w][4](true)
-                    if (adj === 0) {
-                        if ((selfHeight+h !== selfHeight) && (selfWidth+w !== selfWidth)) {
-                            console.log(selfHeight+h, selfWidth+w)
-                        }
-                    } else {
-                        return
-                    }
-                }
-            } catch {
-                return
-            }
+    if ((selfHeight < 0 || selfHeight === maxHeight) || (selfWidth < 0 || selfWidth === maxWidth)) {
+        return null
+    } 
+
+    MineField[selfHeight][selfWidth][5](adjacentMines);
+    MineField[selfHeight][selfWidth][4](true);
+
+    if (adjacentMines === 0) {
+        if (!(visitedFields[selfHeight][selfWidth] === 1)) {
+            visitedFields[selfHeight][selfWidth] = 1
+            recursivelyOpen(MineField, [selfHeight, selfWidth-1], visitedFields)
+            recursivelyOpen(MineField, [selfHeight-1, selfWidth-1], visitedFields)
+            recursivelyOpen(MineField, [selfHeight-1, selfWidth], visitedFields)
+            recursivelyOpen(MineField, [selfHeight-1, selfWidth+1], visitedFields)
+            recursivelyOpen(MineField, [selfHeight, selfWidth+1], visitedFields)
+            recursivelyOpen(MineField, [selfHeight+1, selfWidth+1], visitedFields)
+            recursivelyOpen(MineField, [selfHeight+1, selfWidth], visitedFields)
+            recursivelyOpen(MineField, [selfHeight+1, selfWidth-1], visitedFields)
         }
+        //how do we check every square adjacent to it, without iteration? only recursion.
+    } else {
+        return null
     }
 }

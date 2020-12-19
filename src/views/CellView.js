@@ -19,6 +19,6 @@ export default CellView;
 
 
 function handleClick(setVisible, MineField, selfIndex, recursivelyOpen, setAdjacent) {
-    setVisible(true)
-    recursivelyOpen(MineField, selfIndex, setAdjacent)
+    const visitedFields = new Array(MineField.length).fill().map(()=>Array(MineField[0].length).fill(0));
+    recursivelyOpen(MineField, selfIndex, visitedFields)
 }
