@@ -1,7 +1,7 @@
 import React from 'react';
 import CellView from './views/CellView.js';
 
-const Cell = ({props: { isMine, MineField, selfIndex, lost}}) => {
+const Cell = ({props: { isMine, MineField, selfIndex, lost, visitedCells}}) => {
 
     const [mine, setMine] = React.useState(isMine)
     const [flag, setFlag] = React.useState(false)
@@ -22,7 +22,8 @@ const Cell = ({props: { isMine, MineField, selfIndex, lost}}) => {
         MineField,
         selfIndex,
         recursivelyOpen,
-        lost
+        lost,
+        visitedCells
     }} />
 }
 
@@ -80,6 +81,7 @@ function recursivelyOpen(MineField, selfIndex, visitedFields) {
         }
         //how do we check every square adjacent to it, without iteration? only recursion.
     } else {
+        visitedFields[selfHeight][selfWidth] = 1
         return null
     }
 }

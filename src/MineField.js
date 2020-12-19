@@ -7,6 +7,7 @@ const MineField = ({height, width, mines}) => {
     //in this presenter we will handle all the recursion and
     const [lost, setLost] = React.useState(false)
     const cells = new Array(height).fill().map(()=>Array(width).fill(0));
+    const visitedCells = [new Array(height).fill().map(()=>Array(width).fill(0)), mines];
     for (let i = 0; i < mines; i++) {
         let placed = false;
         while (!placed) {
@@ -18,7 +19,7 @@ const MineField = ({height, width, mines}) => {
 
         }
     }
-    return <MineFieldView MineField={cells} lost={[lost, setLost]}/>
+    return <MineFieldView MineField={cells} lost={[lost, setLost]} visitedCells={visitedCells}/>
 }
 
 
