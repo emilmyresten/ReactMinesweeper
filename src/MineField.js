@@ -1,15 +1,10 @@
 import React from 'react';
-import Cell from './Cell.js';
 import MineFieldView from './views/MineFieldView.js';
 
 
-const MineField = () => {
+const MineField = ({height, width, mines}) => {
     //lets start with 9x9 matrix
     //in this presenter we will handle all the recursion and
-    const [height, setHeight] = React.useState(9)
-    const [width, setWidth] = React.useState(9)
-    
-    const mines = 2;
     const cells = new Array(height).fill().map(()=>Array(width).fill(0));
     for (let i = 0; i < mines; i++) {
         let placed = false;
@@ -22,7 +17,6 @@ const MineField = () => {
 
         }
     }
-    console.log(cells)
     return <MineFieldView MineField={cells}/>
 }
 
