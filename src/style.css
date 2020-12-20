@@ -1,13 +1,35 @@
+.AppContainer {
+    display:inline-block;
+    background-color: rgb(212, 212, 212);
+    outline: outset 5px rgb(212, 212, 212);
+}
+
 .TopBar {
     display:flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
+    background-color: rgb(179, 179, 179);
+    padding: 10px;
 }
 
-.TopBar > div {
+.Difficulties {
+    display:flex;
+    flex-direction: row;
+}
+.Difficulties > div {
     margin-right: 20px;
-  }
+}
 
+.Restart {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height:20px;
+    background-color: rgb(212, 212, 212);
+    outline: outset 2px rgb(212, 212, 212);
+}
 
 .GameContainer {
     display:inline-block;

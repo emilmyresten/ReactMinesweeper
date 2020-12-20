@@ -24,7 +24,8 @@ const Cell = ({props: { isMine, MineField, selfIndex, lost, visitedCells, winSta
         recursivelyOpen,
         lost,
         visitedCells,
-        winState
+        winState,
+        openAdjacentOnFlag
     }} />
 }
 
@@ -85,4 +86,10 @@ function recursivelyOpen(MineField, selfIndex, visitedFields) {
         visitedFields[selfHeight][selfWidth] = 1
         return null
     }
+}
+
+
+function openAdjacentOnFlag(MineField, selfIndex, visitedFields, adjacent) {
+    checkAdjacent(MineField, selfIndex, visitedFields)
+
 }

@@ -10,7 +10,9 @@ const NavBar = () => {
     const [lost, setLost] = React.useState(false)
     const [win, setWin] = React.useState(false)
     return (
-    <div key={`${width} ${restart}`}>
+    <div 
+    className="AppContainer"
+    key={`${width} ${restart}`}>
         <NavBarView 
         setHeight={setHeight} 
         setWidth={setWidth} 
