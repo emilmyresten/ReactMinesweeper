@@ -1,14 +1,14 @@
 import React from 'react';
 import CellView from './views/CellView.js';
 
-const Cell = ({props: { isMine, MineField, selfIndex, lost, visitedCells}}) => {
+const Cell = ({props: { isMine, MineField, selfIndex, lost, visitedCells, winState}}) => {
 
     const [mine, setMine] = React.useState(isMine)
     const [flag, setFlag] = React.useState(false)
     const [visible, setVisible] = React.useState(false)
     const [adjacent, setAdjacent] = React.useState(0)
     const [selfHeight, selfWidth] = selfIndex
-    MineField[selfHeight][selfWidth] = [mine, flag, visible, adjacent, setVisible, setAdjacent]
+    MineField[selfHeight][selfWidth] = [mine, flag, visible, adjacent, setVisible, setAdjacent, setFlag]
 
     return <CellView props={{
         mine, 
@@ -23,7 +23,8 @@ const Cell = ({props: { isMine, MineField, selfIndex, lost, visitedCells}}) => {
         selfIndex,
         recursivelyOpen,
         lost,
-        visitedCells
+        visitedCells,
+        winState
     }} />
 }
 

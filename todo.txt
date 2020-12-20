@@ -1,2 +1,3 @@
 1. add win state
+2. Implemenet open adjacent and flag on spacebar
 2. check plausibility of implementing using react.fragment

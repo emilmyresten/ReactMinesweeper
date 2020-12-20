@@ -14,6 +14,10 @@
     border: outset 4px rgb(212, 212, 212); 
 }
 
+div:focus {
+    outline: none;
+}
+
 .rowCell {
     display: flex;
     flex-direction: row;
@@ -41,7 +45,7 @@
     background-color: rgb(207, 207, 207);
     width: 20px;
     height: 20px;
-    border: solid 1px rgba(92, 92, 92, 0.164); ;
+    border: solid 1px rgba(92, 92, 92, 0.164);
 
 }
 
@@ -53,7 +57,7 @@
     background-color: rgb(255, 77, 77);
     width:20px;
     height:20px;
-    border: solid 1px rgb(148, 148, 148); ;
+    border: solid 1px rgb(148, 148, 148);
 
 }
 
@@ -66,7 +70,19 @@
     color: #fff;
     width:20px;
     height:20px;
-    border: outset 1px rgb(212, 212, 212); ;
+    border: outset 1px rgb(212, 212, 212);
+}
+
+.flaggedMineSquare {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 67, 67);
+    color: #fff;
+    width:20px;
+    height:20px;
+    border: outset 1px rgb(212, 212, 212);  
 }
 
 img {
