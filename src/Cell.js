@@ -89,7 +89,40 @@ function recursivelyOpen(MineField, selfIndex, visitedFields) {
 }
 
 
-function openAdjacentOnFlag(MineField, selfIndex, visitedFields, adjacent) {
-    checkAdjacent(MineField, selfIndex, visitedFields)
-
+function openAdjacentOnFlag(MineField, selfIndex, visitedFields, adjacent, lostState) {
+    let flags = 0;
+    let [selfHeight, selfWidth] = selfIndex;
+    const [maxHeight, maxWidth] = [MineField.length, MineField[0].length] //these handle corners
+    for (let h = -1; h < 2; h++) {
+        for (let w = -1; w < 2; w++) {
+            if (selfHeight+h < 0 || selfHeight+h >= maxHeight || selfWidth+w < 0 || selfWidth+w >= maxWidth) {
+                //we dont want to do any further checkin of adjacency outside our playinfield
+            } else if (MineField[selfHeight+h][selfWidth+w][1] === true) {
+                flags++;
+            }
+        }
+    }
+    if (flags !== adjacent) {
+        console.log("not correct amount of flags placed!")
+    } else {
+        for (let h = -1; h < 2; h++) {
+            for (let w = -1; w < 2; w++) {
+                if (selfHeight+h < 0 || selfHeight+h >= maxHeight || selfWidth+w < 0 || selfWidth+w >= maxWidth) {
+                    //we dont want to do any further checkin of adjacency outside our playinfield
+                } else if (MineField[selfHeight+h][selfWidth+w][2] === false && MineField[selfHeight+h][selfWidth+w][1] === false) {
+                    const adj = checkAdjacent(MineField, [selfHeight+h, selfWidth+w]);
+                    if (adj === 0) {
+                        recursivelyOpen(MineField, [selfHeight+h, selfWidth+w], visitedFields)
+                    } else {
+                    MineField[selfHeight+h][selfWidth+w][5](adj);
+                    MineField[selfHeight+h][selfWidth+w][4](true);
+                    if (MineField[selfHeight+h][selfWidth+w][0] === true) {
+                        lostState(true);
+                    }
+                    visitedFields[selfHeight+h][selfWidth+w] = 1;
+                    }
+                }
+            } 
+        }
+    }
 }

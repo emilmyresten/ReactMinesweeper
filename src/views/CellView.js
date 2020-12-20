@@ -14,7 +14,8 @@ const CellView = ({props: {mine, setMine, flag, setFlag, visible, setVisible, ad
             : handleClick(MineField, selfIndex,recursivelyOpen, visitedCells, winState) 
             : undefined}
         onMouseEnter={(e) => e.target.focus()}
-        onKeyDown={(e) => e.key===" " ? handleSpaceBar(flag, setFlag, visible, openAdjacentOnFlag, MineField, selfIndex, visitedCells, adjacent) : undefined}
+        onMouseLeave={(e) => e.target.blur()}
+        onKeyDown={(e) => e.key===" " ? handleSpaceBar(flag, setFlag, visible, openAdjacentOnFlag, MineField, selfIndex, visitedCells, adjacent, winState, lost) : undefined}
         >
             <div className={visible ? mine ? "mineCellSquare" : "visibleCellSquare" : flag ? "flaggedCellSquare" : "unTouchedCellSquare"}
             tabIndex="0" 
@@ -67,7 +68,24 @@ function handleLoss(lost, setVisible, MineField) {
 }
 
 
-function handleSpaceBar(flag, setFlag, visible, openAdjacentOnFlag, MineField, selfIndex, visitedCells, adjacent) {
-    visible ? openAdjacentOnFlag(MineField, selfIndex, visitedCells, adjacent) : setFlag(!flag);
+function handleSpaceBar(flag, setFlag, visible, openAdjacentOnFlag, MineField, selfIndex, visitedCells, adjacent, winState, lost) {
+    const [visited, mines] = visitedCells
+    const possible = (MineField.length * MineField[0].length) - mines
+    visible ? openAdjacentOnFlag(MineField, selfIndex, visited, adjacent, lost[1]) : setFlag(!flag);
+    if (visited.flatMap(e=>e).filter(x=>x===1).length === possible) { 
+        console.log("won!")
+        // if the number of visible cells are the same as 
+        // the number of non-mine cells we have won.
+        winState[1](true);
+        for (let i=0; i < MineField.length; i++) {
+            for (let j=0; j < MineField[0].length; j++) {
+                if (!MineField[i][j][2]) {
+                    if (!MineField[i][j][1]) {
+                        MineField[i][j][6](true)
+                    }     
+                }
+            }
+        }
+    }   
 
 }

@@ -10,6 +10,7 @@
     justify-content: space-between;
     background-color: rgb(179, 179, 179);
     padding: 10px;
+    border: inset 2px rgb(212, 212, 212);
 }
 
 .Difficulties {
@@ -49,6 +50,7 @@
 
 div:focus {
     outline: none;
+    background-color: rgba(123, 124, 194, 0.322);
 }
 
 .rowCell {
