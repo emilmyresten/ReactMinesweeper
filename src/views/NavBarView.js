@@ -3,8 +3,11 @@ import gameoveremoji from '../assets/gameoveremoji.png';
 import openmouthemoji from '../assets/openmouthemoji.png';
 import winemoji from '../assets/winemoji.png';
 
+import React from 'react';
+
 
 const NavBarView = ({setHeight, setWidth, setMines, setRestart, restart, lost, win}) => {
+    const [restartPressed, setRestartPressed] = React.useState(false)
     return (
         <div className="TopBar">
             <div className="Difficulties">
@@ -28,7 +31,9 @@ const NavBarView = ({setHeight, setWidth, setMines, setRestart, restart, lost, w
                 </div>
             </div>
             <div
-            className="Restart"
+            className={restartPressed ? "RestartClick" :"Restart"}
+            onMouseDown={() => setRestartPressed(true)}
+            onMouseUp={() => setRestartPressed(false)}
             onClick={()=>{setRestart(restart+=1);lost[1](false);win[1](false);}} //restart+1 forces rerender on key change for parent div. 
             >
                 {!lost[0] ? win[0] ? <img src={winemoji} alt="restart"/> : <img src={smilingemoji} alt="restart"/> : <img src={gameoveremoji} alt="restart"/>}

@@ -31,6 +31,17 @@
     outline: outset 2px rgb(212, 212, 212);
 }
 
+.RestartClick {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height:20px;
+    background-color: rgb(212, 212, 212);
+    outline: inset 2px rgb(212, 212, 212);
+}
+
 .GameContainer {
     display:inline-block;
     border: outset 4px rgb(212, 212, 212); 
