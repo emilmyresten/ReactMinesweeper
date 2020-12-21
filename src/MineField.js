@@ -6,7 +6,7 @@ const MineField = ({height, width, mines, lost, setLost, winState, setStarted}) 
     //lets start with 9x9 matrix
     //in this presenter we will handle all the recursion and
     const cells = new Array(height).fill().map(()=>Array(width).fill(0));
-    const visitedCells = [new Array(height).fill().map(()=>Array(width).fill(0)), mines];
+    const [visitedCells, setVisitedCells] = React.useState([new Array(height).fill().map(()=>Array(width).fill(0)), mines]);
 
     for (let i = 0; i < mines; i++) {
         let placed = false;
@@ -19,6 +19,9 @@ const MineField = ({height, width, mines, lost, setLost, winState, setStarted}) 
 
         }
     }
+
+    console.log(visitedCells);
+
     return <MineFieldView 
     MineField={cells} 
     lost={[lost, setLost]} 

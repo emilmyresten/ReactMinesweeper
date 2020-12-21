@@ -34,7 +34,7 @@ const NavBarView = ({setHeight, setWidth, width, setMines, setRestart, restart, 
             className={restartPressed ? "RestartClick" :"Restart"}
             onMouseDown={() => setRestartPressed(true)}
             onMouseUp={() => setRestartPressed(false)}
-            onClick={()=>{setRestart(restart+=1);lost[1](false);win[1](false);setTime(0)}} //restart+1 forces rerender on key change for parent div. 
+            onClick={()=>{setRestart(restart+=1);lost[1](false);win[1](false);setTime(0); setStarted(false)}} //restart+1 forces rerender on key change for parent div. 
             >
                 {!lost[0] ? win[0] ? <img src={winemoji} alt="restart"/> : <img src={smilingemoji} alt="restart"/> : <img src={gameoveremoji} alt="restart"/>}
             </div>
