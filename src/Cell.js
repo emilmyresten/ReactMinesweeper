@@ -104,7 +104,6 @@ function openAdjacentOnFlag(MineField, selfIndex, visitedFields, adjacent, lost,
         }
     }
     if (flags !== adjacent) {
-        console.log("not correct amount of flags placed!")
     } else {
         for (let h = -1; h < 2; h++) {
             for (let w = -1; w < 2; w++) {

@@ -20,8 +20,6 @@ const MineField = ({height, width, mines, lost, setLost, winState, setStarted}) 
         }
     }
 
-    console.log(visitedCells);
-
     return <MineFieldView 
     MineField={cells} 
     lost={[lost, setLost]} 

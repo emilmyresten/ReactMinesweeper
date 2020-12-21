@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
 .AppContainer {
     display:inline-block;
     background-color: rgb(212, 212, 212);
@@ -140,3 +142,36 @@ img {
     height: 15px;
 }
 
+
+.cCell {
+    font-family: 'Roboto', sans-serif;
+    cursor: default;
+}
+
+.c1 {
+    color: blue;
+}
+
+.c2 {
+    color: green;
+}
+
+.c3 {
+    color: red;
+}
+
+.c4 {
+    color: rgb(0, 0, 116);
+}
+
+.c5 {
+    color: brown;
+}
+
+.c6 {
+    color: turquoise;
+}
+
+.c7 {
+    color: #000;
+}

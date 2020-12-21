@@ -4,6 +4,7 @@ import React from 'react';
 
 const CellView = ({props: {mine, setMine, flag, setFlag, visible, setVisible, adjacent, setAdjacent, MineField, selfIndex, recursivelyOpen, lost, visitedCells, winState, openAdjacentOnFlag, setStarted}}) => {
     const [hoverState, setHoverState] = React.useState(false)
+    const adjancencyClasses = ["c1" ,"c2", "c3", "c4", "c5", "c6", "c7"]
     return (
         <div className="cellContainer"
         onContextMenu={(!lost[0] && !winState[0]) ? (e) => {setFlag(!flag);e.preventDefault();return false;} : (e) => {e.preventDefault();return false;} }
@@ -19,7 +20,7 @@ const CellView = ({props: {mine, setMine, flag, setFlag, visible, setVisible, ad
             <div className={visible ? mine ? "mineCellSquare" : "visibleCellSquare" : flag ? "flaggedCellSquare" : "unTouchedCellSquare"}
             tabIndex="0" 
             >
-                {visible ? mine ? <img src={mineImg} alt="m"/> : adjacent === 0 ? " " : adjacent : flag ? <img src={flagImg} alt="f"/> : ""}
+                {visible ? mine ? <img src={mineImg} alt="m"/> : adjacent === 0 ? " " : <div className={`cCell ${adjancencyClasses[adjacent-1]}`}>{adjacent}</div> : flag ? <img src={flagImg} alt="f"/> : ""}
             </div>
         </div>
     )
@@ -78,7 +79,6 @@ function handleSpaceBar(flag, setFlag, visible, openAdjacentOnFlag, MineField, s
     const possible = (MineField.length * MineField[0].length) - mines
     !lost[0] ? visible ? openAdjacentOnFlag(MineField, selfIndex, visited, adjacent, lost, handleLoss, setStarted) : setFlag(!flag) : console.log("you lost");
     if (visited.flatMap(e=>e).filter(x=>x===1).length === possible) { 
-        console.log("won!")
         // if the number of visible cells are the same as 
         // the number of non-mine cells we have won.
         winState[1](true);
