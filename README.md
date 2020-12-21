@@ -1,3 +1,3 @@
 # Minesweeper recreated in react.
 
-![readmepic.png](https://raw.githubusercontent.com/emilmyresten/ReactMinesweeper/master/src/assets/readmepic.png?token=AG6T7M2BMZR4QSH4AKI253C74CWLC)
+![readmepic.png](https://github.com/emilmyresten/ReactMinesweeper/blob/master/src/assets/readmepic.png?raw=true)
