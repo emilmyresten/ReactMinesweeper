@@ -2,20 +2,19 @@ import flagImg from '../assets/flag.png';
 import mineImg from '../assets/mine.png';
 import React from 'react';
 
-const CellView = ({props: {mine, setMine, flag, setFlag, visible, setVisible, adjacent, setAdjacent, MineField, selfIndex, recursivelyOpen, lost, visitedCells, winState, openAdjacentOnFlag}}) => {
+const CellView = ({props: {mine, setMine, flag, setFlag, visible, setVisible, adjacent, setAdjacent, MineField, selfIndex, recursivelyOpen, lost, visitedCells, winState, openAdjacentOnFlag, setStarted}}) => {
     const [hoverState, setHoverState] = React.useState(false)
-    
     return (
         <div className="cellContainer"
         onContextMenu={(!lost[0] && !winState[0]) ? (e) => {setFlag(!flag);e.preventDefault();return false;} : (e) => {e.preventDefault();return false;} }
         onClick={(!lost[0] && !winState[0]) ?
             () => flag ? undefined 
-            : mine ? handleLoss(lost, setVisible, MineField) 
-            : handleClick(MineField, selfIndex,recursivelyOpen, visitedCells, winState) 
+            : mine ? handleLoss(lost, setVisible, MineField, setStarted) 
+            : handleClick(MineField, selfIndex,recursivelyOpen, visitedCells, winState, setStarted) 
             : undefined}
         onMouseEnter={(e) => e.target.focus()}
         onMouseLeave={(e) => e.target.blur()}
-        onKeyDown={(e) => e.key===" " ? handleSpaceBar(flag, setFlag, visible, openAdjacentOnFlag, MineField, selfIndex, visitedCells, adjacent, winState, lost) : undefined}
+        onKeyDown={(e) => e.key===" " ? handleSpaceBar(flag, setFlag, visible, openAdjacentOnFlag, MineField, selfIndex, visitedCells, adjacent, winState, lost, setStarted) : undefined}
         >
             <div className={visible ? mine ? "mineCellSquare" : "visibleCellSquare" : flag ? "flaggedCellSquare" : "unTouchedCellSquare"}
             tabIndex="0" 
@@ -32,8 +31,11 @@ export default CellView;
 
 
 
-function handleClick(MineField, selfIndex, recursivelyOpen, visitedCells, winState) {
+function handleClick(MineField, selfIndex, recursivelyOpen, visitedCells, winState, setStarted) {
     const [visited, mines] = visitedCells
+    if (visited.flatMap(e=>e).filter(x=>x===1).length === 0) {
+        setStarted(true)
+    }
     const possible = (MineField.length * MineField[0].length) - mines
     recursivelyOpen(MineField, selfIndex, visited)
     if (visited.flatMap(e=>e).filter(x=>x===1).length === possible) { 
@@ -49,10 +51,12 @@ function handleClick(MineField, selfIndex, recursivelyOpen, visitedCells, winSta
                 }
             }
         }
+        setStarted(false)
     }   
 }
 
-function handleLoss(lost, setVisible, MineField) {
+
+function handleLoss(lost, setVisible, MineField, setStarted) {
     setVisible(true);
     lost[1](true);
     for (let i=0; i < MineField.length; i++) {
@@ -64,14 +68,15 @@ function handleLoss(lost, setVisible, MineField) {
             }
         }
     }
+    setStarted(false);
 
 }
 
 
-function handleSpaceBar(flag, setFlag, visible, openAdjacentOnFlag, MineField, selfIndex, visitedCells, adjacent, winState, lost) {
+function handleSpaceBar(flag, setFlag, visible, openAdjacentOnFlag, MineField, selfIndex, visitedCells, adjacent, winState, lost, setStarted) {
     const [visited, mines] = visitedCells
     const possible = (MineField.length * MineField[0].length) - mines
-    visible ? openAdjacentOnFlag(MineField, selfIndex, visited, adjacent, lost[1]) : setFlag(!flag);
+    !lost[0] ? visible ? openAdjacentOnFlag(MineField, selfIndex, visited, adjacent, lost, handleLoss, setStarted) : setFlag(!flag) : console.log("you lost");
     if (visited.flatMap(e=>e).filter(x=>x===1).length === possible) { 
         console.log("won!")
         // if the number of visible cells are the same as 
@@ -86,6 +91,7 @@ function handleSpaceBar(flag, setFlag, visible, openAdjacentOnFlag, MineField, s
                 }
             }
         }
+        setStarted(false);
     }   
 
 }

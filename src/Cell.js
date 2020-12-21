@@ -1,7 +1,7 @@
 import React from 'react';
 import CellView from './views/CellView.js';
 
-const Cell = ({props: { isMine, MineField, selfIndex, lost, visitedCells, winState}}) => {
+const Cell = ({props: { isMine, MineField, selfIndex, lost, visitedCells, winState, setStarted}}) => {
 
     const [mine, setMine] = React.useState(isMine)
     const [flag, setFlag] = React.useState(false)
@@ -25,7 +25,8 @@ const Cell = ({props: { isMine, MineField, selfIndex, lost, visitedCells, winSta
         lost,
         visitedCells,
         winState,
-        openAdjacentOnFlag
+        openAdjacentOnFlag,
+        setStarted
     }} />
 }
 
@@ -89,7 +90,7 @@ function recursivelyOpen(MineField, selfIndex, visitedFields) {
 }
 
 
-function openAdjacentOnFlag(MineField, selfIndex, visitedFields, adjacent, lostState) {
+function openAdjacentOnFlag(MineField, selfIndex, visitedFields, adjacent, lost, handleLoss, setStarted) {
     let flags = 0;
     let [selfHeight, selfWidth] = selfIndex;
     const [maxHeight, maxWidth] = [MineField.length, MineField[0].length] //these handle corners
@@ -117,7 +118,7 @@ function openAdjacentOnFlag(MineField, selfIndex, visitedFields, adjacent, lostS
                     MineField[selfHeight+h][selfWidth+w][5](adj);
                     MineField[selfHeight+h][selfWidth+w][4](true);
                     if (MineField[selfHeight+h][selfWidth+w][0] === true) {
-                        lostState(true);
+                        handleLoss(lost, MineField[selfHeight+h][selfWidth+w][4], MineField, setStarted)
                     }
                     visitedFields[selfHeight+h][selfWidth+w] = 1;
                     }

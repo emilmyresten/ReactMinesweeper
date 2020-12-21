@@ -1,3 +1,4 @@
-
-2. Implemenet open adjacent and flag on spacebar
-2. check plausibility of implementing using react.fragment
+1. implement game timer
+2. Space bar doesnt correctly handle visited fields.
+3. Fix ui to be max the size of game field.
+4. check plausibility of implementing using react.fragment
