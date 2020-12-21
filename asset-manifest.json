@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/ReactMinesweeper/static/css/main.c462847a.chunk.css",
+    "main.js": "/ReactMinesweeper/static/js/main.93eec3ec.chunk.js",
+    "main.js.map": "/ReactMinesweeper/static/js/main.93eec3ec.chunk.js.map",
+    "runtime-main.js": "/ReactMinesweeper/static/js/runtime-main.0a2f60fd.js",
+    "runtime-main.js.map": "/ReactMinesweeper/static/js/runtime-main.0a2f60fd.js.map",
+    "static/js/2.3628985a.chunk.js": "/ReactMinesweeper/static/js/2.3628985a.chunk.js",
+    "static/js/2.3628985a.chunk.js.map": "/ReactMinesweeper/static/js/2.3628985a.chunk.js.map",
+    "index.html": "/ReactMinesweeper/index.html",
+    "static/css/main.c462847a.chunk.css.map": "/ReactMinesweeper/static/css/main.c462847a.chunk.css.map",
+    "static/js/2.3628985a.chunk.js.LICENSE.txt": "/ReactMinesweeper/static/js/2.3628985a.chunk.js.LICENSE.txt",
+    "static/media/gameoveremoji.8db2cd0d.png": "/ReactMinesweeper/static/media/gameoveremoji.8db2cd0d.png",
+    "static/media/mine.80edd8c7.png": "/ReactMinesweeper/static/media/mine.80edd8c7.png",
+    "static/media/openmouthemoji.86fecd97.png": "/ReactMinesweeper/static/media/openmouthemoji.86fecd97.png",
+    "static/media/smilingemoji.7790f50b.png": "/ReactMinesweeper/static/media/smilingemoji.7790f50b.png",
+    "static/media/winemoji.a6aad5a9.png": "/ReactMinesweeper/static/media/winemoji.a6aad5a9.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0a2f60fd.js",
+    "static/js/2.3628985a.chunk.js",
+    "static/css/main.c462847a.chunk.css",
+    "static/js/main.93eec3ec.chunk.js"
+  ]
+}
